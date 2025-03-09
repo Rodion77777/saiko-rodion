@@ -1,4 +1,5 @@
 rootProject.name = "saiko-rodion"
 
-includeBuild("eureka-server")
 includeBuild("api-gateway")
+includeBuild("eureka-client-file-storage")
+includeBuild("eureka-server")
