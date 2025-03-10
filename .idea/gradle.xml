@@ -17,6 +17,11 @@
                   <project path="$PROJECT_DIR$/eureka-client-file-storage" />
                 </projects>
               </build>
+              <build path="$PROJECT_DIR$/eureka-client-todo" name="eureka-client-todo">
+                <projects>
+                  <project path="$PROJECT_DIR$/eureka-client-todo" />
+                </projects>
+              </build>
               <build path="$PROJECT_DIR$/eureka-client-user" name="eureka-client-user">
                 <projects>
                   <project path="$PROJECT_DIR$/eureka-client-user" />
@@ -37,6 +42,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/api-gateway" />
             <option value="$PROJECT_DIR$/eureka-client-file-storage" />
+            <option value="$PROJECT_DIR$/eureka-client-todo" />
             <option value="$PROJECT_DIR$/eureka-client-user" />
             <option value="$PROJECT_DIR$/eureka-server" />
           </set>
@@ -55,6 +61,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/eureka-client-file-storage" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/eureka-client-todo" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/eureka-client-todo" />
           </set>
         </option>
       </GradleProjectSettings>
