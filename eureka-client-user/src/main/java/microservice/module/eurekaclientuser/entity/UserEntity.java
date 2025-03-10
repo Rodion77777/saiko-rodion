@@ -17,6 +17,6 @@ public class UserEntity {
     private String userName;
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<TodoEntity> todos;
+    @ElementCollection
+    private List<Long> todoId;
 }
