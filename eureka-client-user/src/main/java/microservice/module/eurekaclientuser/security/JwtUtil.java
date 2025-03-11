@@ -1,12 +1,15 @@
 package microservice.module.eurekaclientuser.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
 
+@Component
 public class JwtUtil {
     private static final String JWT_SECRET = "secret";
     private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor("your_very_long_secret_key_for_hmac".getBytes());
@@ -28,5 +31,22 @@ public class JwtUtil {
                 .expiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SECRET_KEY)
                 .compact();
+    }
+
+    public Claims extractClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(SECRET_KEY)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public boolean validateToken(String token, String username) {
+        String tokenUsername = extractClaims(token).getSubject();
+        return (username.equals(tokenUsername) && !isTokenExpired(token));
+    }
+
+    public boolean isTokenExpired(String token) {
+        return extractClaims(token).getExpiration().before(new Date());
     }
 }
