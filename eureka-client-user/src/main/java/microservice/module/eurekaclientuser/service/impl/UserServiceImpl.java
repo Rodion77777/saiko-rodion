@@ -7,6 +7,7 @@ import microservice.module.eurekaclientuser.model.User;
 import microservice.module.eurekaclientuser.repository.UserRepo;
 import microservice.module.eurekaclientuser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,8 +19,12 @@ public class UserServiceImpl implements UserService
     @Override
     public UserEntity registration (UserEntity user) throws UserAlreadyExistException
     {
+        // Проверка наличия такого пользователя
         if (userRepo.findByUserName(user.getUserName()) != null)
             throw new UserAlreadyExistException("User already exists!");
+        // Так как пользователь не найден, шифруем его пароль перед регистрацией пользователя
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        // Сохраняем объект в базу
         return userRepo.save(user);
     }
 
