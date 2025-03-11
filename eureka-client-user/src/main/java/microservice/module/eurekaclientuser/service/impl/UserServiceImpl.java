@@ -6,7 +6,7 @@ import microservice.module.eurekaclientuser.exception.UserNotFoundException;
 import microservice.module.eurekaclientuser.model.User;
 import microservice.module.eurekaclientuser.repository.UserRepo;
 import microservice.module.eurekaclientuser.service.UserService;
-import microservice.module.eurekaclientuser.util.JwtUtil;
+import microservice.module.eurekaclientuser.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService
         // проверка наличия пользователя, если нет - выбрасываем исключение
         if (candidate == null)
             throw new UserNotFoundException("User not found");
-
         // если пользователь есть, сравниваем пароль
         boolean isMatchPass = new BCryptPasswordEncoder().matches(user.getPassword(), candidate.getPassword());
+        // если пароль совпадает, отдаем токен, если нет - возвращаем null
         return isMatchPass ? JwtUtil.generateToken(user.getUserName()) : null;
     }
 
