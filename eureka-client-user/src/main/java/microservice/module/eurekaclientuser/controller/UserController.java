@@ -3,6 +3,7 @@ package microservice.module.eurekaclientuser.controller;
 import microservice.module.eurekaclientuser.entity.UserEntity;
 import microservice.module.eurekaclientuser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,18 @@ public class UserController
 {
     @Autowired
     private UserService userService;
+
+    @PostMapping("/login")
+    public ResponseEntity login (@RequestBody UserEntity user)
+    {
+        try {
+            String loginToken = userService.login(user);
+            if (loginToken != null) return ResponseEntity.ok().body(loginToken);
+            else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Something wrong!" + e.getMessage());
+        }
+    }
 
     @PostMapping
     public ResponseEntity registration (@RequestBody UserEntity user)
