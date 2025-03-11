@@ -19,7 +19,7 @@ public class UserController
     {
         try {
             String loginToken = userService.login(user);
-            if (loginToken != null) return ResponseEntity.ok().body(loginToken);
+            if (loginToken != null) return ResponseEntity.ok().body("Bearer ".concat(loginToken));
             else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Something wrong!" + e.getMessage());
