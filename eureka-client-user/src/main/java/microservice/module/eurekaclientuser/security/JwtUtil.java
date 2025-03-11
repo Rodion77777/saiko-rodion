@@ -1,4 +1,4 @@
-package microservice.module.eurekaclientuser.util;
+package microservice.module.eurekaclientuser.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
