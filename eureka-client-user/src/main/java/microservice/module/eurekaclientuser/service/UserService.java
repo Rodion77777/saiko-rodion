@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
+    String      login               (UserEntity user)                throws UserNotFoundException;
     UserEntity  registration        (UserEntity user)                throws UserAlreadyExistException;
     User        getOne              (Long id)                        throws UserNotFoundException;
     Long        deleteUser          (Long id)                        throws UserNotFoundException;
