@@ -12,9 +12,14 @@ import java.util.List;
 @Data
 public class UserEntity {
     @Id
+    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "username", nullable = false)
     private String userName;
+
+    @Column(name = "password", nullable = false)
     private String password;
 
     @ElementCollection
