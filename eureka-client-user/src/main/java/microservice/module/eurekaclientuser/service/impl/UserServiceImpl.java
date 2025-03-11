@@ -62,12 +62,11 @@ public class UserServiceImpl implements UserService
     @Override
     public UserEntity updateUserByID (Long id, UserEntity userEntity) throws UserNotFoundException
     {
-        UserEntity userFromDB = userRepo.findById(id).get();
-
-            userFromDB.setUserName(userEntity.getUserName());
-            userFromDB.setPassword(userEntity.getPassword());
-
-        return userRepo.save(userFromDB);
+        if (userRepo.findById(id).isEmpty()) throw new UserNotFoundException("User not found!");
+        UserEntity candidate = userRepo.findById(id).get();
+        candidate.setUserName(userEntity.getUserName());
+        candidate.setPassword(userEntity.getPassword());
+        return userRepo.save(candidate);
     }
 
     @Override
